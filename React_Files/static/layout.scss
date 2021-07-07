@@ -1,0 +1,23 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+body {
+	@apply bg-gray-100;
+}
+
+label {
+	@apply block text-sm font-medium text-gray-700 mb-2;
+}
+
+input {
+	@apply placeholder-gray-500 w-full sm:text-sm transition-all bg-white hover:bg-blue-100 focus:bg-white border-2 focus:border-blue-500 hover:border-blue-500 outline-none px-3 py-2 rounded-lg;
+}
+
+.btn-primary {
+	@apply transition-all group flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500;
+}
+
+a {
+	@apply shadow-sm transition-all justify-items-center  align-middle text-center py-1 md:py-10 px-3 md:px-16  border-2 border-transparent hover:border-blue-500 focus:border-blue-500 text-sm font-bold rounded-md text-gray-700 hover:text-blue-500 bg-white hover:bg-blue-100 focus:outline-none;
+}
