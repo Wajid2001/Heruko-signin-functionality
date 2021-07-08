@@ -93,7 +93,9 @@ export default function Register(props) {
 			>
 				<h1 className='text-2xl -mt-2'>Register</h1>
 				{error !== "" ? (
-					<div className='text-md text-red-500 font-bold'>{error}</div>
+					<div className='text-center bg-red-50 rounded-lg  border-2 border-red-500 text-md text-red-500 font-bold'>
+						{error}
+					</div>
 				) : (
 					<></>
 				)}
