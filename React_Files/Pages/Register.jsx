@@ -115,9 +115,9 @@ export default function Register(props) {
 					<label>Confirm Password</label>
 					<input type='password' name='confirmuserpassword' />
 				</div>
-				<input type='submit' className='btn-primary w-full'>
+				<div id='submitAuthenticationBtn' type='submit' className='btn-primary w-full'>
 					Create New Account
-				</input>
+				</div>
 			</form>
 		</>
 	);
