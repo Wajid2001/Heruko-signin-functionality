@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Register(props) {
 	const csrfmiddlewaretoken = props.csrfmiddlewaretoken;
