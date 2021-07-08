@@ -37,7 +37,7 @@ export default function Signin(props) {
 
 	const SubmitForm = () => {
 		LoadingAndFetchData();
-		fetch("./api/account/register", {
+		fetch("./api/account/signin", {
 			method: "POST",
 			headers: {
 				Accept: "application/json",

@@ -50,7 +50,7 @@ export default function Register(props) {
 	const SubmitForm = () => {
 		if (checkPass()) {
 			LoadingAndFetchData();
-			fetch("./api/account/signin", {
+			fetch("./api/account/register", {
 				method: "POST",
 				headers: {
 					Accept: "application/json",
