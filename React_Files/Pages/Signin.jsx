@@ -86,9 +86,9 @@ export default function Signin(props) {
 					<label>Password</label>
 					<input type='password' placeholder='● ● ● ●' />
 				</div>
-				<div id='submitAuthenticationBtn' className='btn-primary w-full'>
+				<button id='submitAuthenticationBtn' className='btn-primary w-full'>
 					Sign In
-				</div>
+				</button>
 			</form>
 		</>
 	);
