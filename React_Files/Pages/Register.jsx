@@ -19,7 +19,6 @@ export default function Register(props) {
 		document.querySelectorAll("#authenticationForm input").forEach((e) => {
 			formData[e.name] = e.value;
 		});
-		formData["csrfmiddlewaretoken"] = csrfmiddlewaretoken;
 
 		// Changing singinbtn state to loading
 		const registerBtn = document.querySelector("#submitAuthenticationBtn");
@@ -53,6 +52,11 @@ export default function Register(props) {
 			LoadingAndFetchData();
 			fetch("./api/account/signin", {
 				method: "POST",
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/json; charset=UTF-8",
+					"X-CSRFToken": csrfmiddlewaretoken,
+				},
 				body: JSON.stringify(formData),
 			})
 				.then((r) => r.json())
