@@ -2,6 +2,12 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+.loading {
+	@apply rounded-full animate-spin w-6 h-6 border-2;
+	border-color: transparent;
+	border-top-color: white;
+}
+
 body {
 	@apply bg-gray-100;
 }

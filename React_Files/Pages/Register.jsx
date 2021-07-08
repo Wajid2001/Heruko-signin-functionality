@@ -11,33 +11,113 @@ export default function Register(props) {
 		}
 	}, []);
 
+	let formData = {}; // This will store important data send to server
+	let registerBtnData = ""; // This will store restore state for sign in button
+
+	const LoadingAndFetchData = () => {
+		// Storing data from form to formData variable as object
+		document.querySelectorAll("#authenticationForm input").forEach((e) => {
+			formData[e.name] = e.value;
+		});
+		formData["csrfmiddlewaretoken"] = csrfmiddlewaretoken;
+
+		// Changing singinbtn state to loading
+		const registerBtn = document.querySelector("input[type='submit']");
+		registerBtnData = registerBtn.innerHTML;
+		registerBtn.innerHTML = "<div class='loading'></div>";
+	};
+
+	// This will restore the sign btn state to previous one
+	const resetResgisterBtn = () => {
+		const registerBtn = document.querySelector("input[type='submit']");
+		registerBtn.innerHTML = registerBtnData;
+	};
+
+	// This will ensure if the both the passwords are same
+	const [error, setError] = useState("");
+	function checkPass() {
+		setError("");
+
+		const a = document.querySelector("#password");
+		const b = document.querySelector("#confirmpassword");
+		if (b.value != a.value) {
+			setError("Both password must match");
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	const SubmitForm = () => {
+		if (checkPass()) {
+			LoadingAndFetchData();
+			fetch("./api/account/signin", {
+				method: "POST",
+				body: JSON.stringify(formData),
+			})
+				.then((r) => r.json())
+				.then((data) => {
+					/*
+					 * This will work only
+					 * if there is any type of error
+					 * else the user will be redirected to index page
+					 */
+					resetResgisterBtn();
+					console.log(data);
+					if (data.error) {
+						setError(data.error);
+					} else {
+						location.replace("./");
+					}
+				})
+				.catch((e) => {
+					resetResgisterBtn();
+					console.log(`There is a catch ${e}`);
+				});
+		}
+	};
+
 	return (
 		<>
-			<form className='mx-auto my-12 md:my-16 p-6 bg-white space-y-4 max-w-sm  rounded-lg shadow-md'>
+			<form
+				id='authenticationForm'
+				onSubmit={(e) => {
+					e.preventDefault();
+					SubmitForm();
+				}}
+				className='mx-auto my-12 md:my-16 p-6 bg-white space-y-4 max-w-sm  rounded-lg shadow-md'
+			>
 				<h1 className='text-2xl -mt-2'>Register</h1>
+				{error !== "" ? (
+					<div className='text-md text-red-500 font-bold'>{error}</div>
+				) : (
+					<></>
+				)}
 				<div className='flex space-x-4'>
 					<div>
 						<label>First Name</label>
-						<input type='first_name' />
+						<input type='text' name='first_name' />
 					</div>
 					<div>
 						<label>Last Name</label>
-						<input type='last_name' />
+						<input type='text' name='last_name' />
 					</div>
 				</div>
 				<div>
 					<label>Email</label>
-					<input type='email' placeholder='example@mail.com' />
+					<input type='email' name='email' placeholder='example@mail.com' />
 				</div>
 				<div>
 					<label>Password</label>
-					<input type='password' />
+					<input type='password' name='password' />
 				</div>
 				<div>
 					<label>Confirm Password</label>
-					<input type='cpassword' />
+					<input type='password' name='confirmuserpassword' />
 				</div>
-				<button className='btn-primary w-full'>Create New Account </button>
+				<input type='submit' className='btn-primary w-full'>
+					Create New Account
+				</input>
 			</form>
 		</>
 	);

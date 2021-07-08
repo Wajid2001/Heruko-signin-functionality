@@ -11,10 +11,73 @@ export default function Signin(props) {
 		}
 	}, []);
 
+	let formData = {}; // This will store important data send to server
+	let registerBtnData = ""; // This will store restore state for sign in button
+
+	const LoadingAndFetchData = () => {
+		// Storing data from form to formData variable as object
+		document.querySelectorAll("#authenticationForm input").forEach((e) => {
+			formData[e.name] = e.value;
+		});
+		formData["csrfmiddlewaretoken"] = csrfmiddlewaretoken;
+
+		// Changing singinbtn state to loading
+		const registerBtn = document.querySelector("input[type='submit']");
+		registerBtnData = registerBtn.innerHTML;
+		registerBtn.innerHTML = "<div class='loading'></div>";
+	};
+
+	// This will restore the sign btn state to previous one
+	const resetResgisterBtn = () => {
+		const registerBtn = document.querySelector("input[type='submit']");
+		registerBtn.innerHTML = registerBtnData;
+	};
+
+	// This will ensure if the both the passwords are same
+	const [error, setError] = useState("");
+
+	const SubmitForm = () => {
+		LoadingAndFetchData();
+		fetch("./api/account/register", {
+			method: "POST",
+			body: JSON.stringify(formData),
+		})
+			.then((r) => r.json())
+			.then((data) => {
+				/*
+				 * This will work only
+				 * if there is any type of error
+				 * else the user will be redirected to index page
+				 */
+				resetResgisterBtn();
+				console.log(data);
+				if (data.error) {
+					setError(data.error);
+				} else {
+					location.replace("./");
+				}
+			})
+			.catch((e) => {
+				resetResgisterBtn();
+				console.log(`There is a catch ${e}`);
+			});
+	};
+
 	return (
 		<>
-			<form className='mx-auto my-12 md:my-16 p-6 bg-white space-y-4 max-w-sm  rounded-lg shadow-md'>
+			<form
+				onSubmit={(e) => {
+					e.preventDefault();
+					SubmitForm();
+				}}
+				className='mx-auto my-12 md:my-16 p-6 bg-white space-y-4 max-w-sm  rounded-lg shadow-md'
+			>
 				<h1 className='text-2xl -mt-2'>Login</h1>
+				{error !== "" ? (
+					<div className='text-md text-red-500 font-bold'>{error}</div>
+				) : (
+					<></>
+				)}
 				<div>
 					<label>Email</label>
 					<input type='email' placeholder='example@mail.com' />

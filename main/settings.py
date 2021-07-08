@@ -132,7 +132,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-import os
 STATIC_ROOT = BASE_DIR
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
