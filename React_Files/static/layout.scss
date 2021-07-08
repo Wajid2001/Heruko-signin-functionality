@@ -25,5 +25,5 @@ input {
 }
 
 a {
-	@apply shadow-sm transition-all justify-items-center  align-middle text-center py-1 md:py-10 px-3 md:px-16  border-2 border-transparent hover:border-blue-500 focus:border-blue-500 text-sm font-bold rounded-md text-gray-700 hover:text-blue-500 bg-white hover:bg-blue-100 focus:outline-none;
+	@apply shadow-sm transition-all justify-items-center  align-middle text-center py-1 md:py-3 px-3 md:px-5  border-2 border-transparent hover:border-blue-500 focus:border-blue-500 text-sm font-bold rounded-md text-gray-700 hover:text-blue-500 bg-white hover:bg-blue-100 focus:outline-none;
 }
