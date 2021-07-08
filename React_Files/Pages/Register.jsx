@@ -39,7 +39,7 @@ export default function Register(props) {
 		setError("");
 
 		const a = document.querySelector("input[name='password']");
-		const b = document.querySelector("input[name='confirmpassword']");
+		const b = document.querySelector("input[name='confirmuserpassword']");
 		if (b.value != a.value) {
 			setError("Both password must match");
 			return false;
