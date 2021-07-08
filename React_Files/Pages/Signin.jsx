@@ -22,14 +22,14 @@ export default function Signin(props) {
 		formData["csrfmiddlewaretoken"] = csrfmiddlewaretoken;
 
 		// Changing singinbtn state to loading
-		const registerBtn = document.querySelector("input[type='submit']");
+		const registerBtn = document.querySelector("#submitAuthenticationBtn");
 		registerBtnData = registerBtn.innerHTML;
 		registerBtn.innerHTML = "<div class='loading'></div>";
 	};
 
 	// This will restore the sign btn state to previous one
 	const resetResgisterBtn = () => {
-		const registerBtn = document.querySelector("input[type='submit']");
+		const registerBtn = document.querySelector("#submitAuthenticationBtn");
 		registerBtn.innerHTML = registerBtnData;
 	};
 
