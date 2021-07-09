@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Switch, NavLink } from "react-router-dom";
 
 import ReactDOM from "react-dom";
 
+document.title = "Sign in Page using Django and React js";
+
 const Home = lazy(() => import("./Pages/Home"));
 const Sigin = lazy(() => import("./Pages/Signin"));
 const Register = lazy(() => import("./Pages/Register"));
